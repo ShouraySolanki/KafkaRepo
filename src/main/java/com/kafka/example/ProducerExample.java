@@ -17,27 +17,14 @@ public class ProducerExample {
 
     public void produceMethod(Producer producer) {
 
-        Scanner read = new Scanner(System.in);
-        KafkaUtils kafkaUtils = new KafkaUtils();
-        kafkaUtils.getProducer();
-        boolean end = true;
-        while(end == true){
-            System.out.println("Data : ");
-            String key = read.nextLine();
-            ProducerRecord<String, String> rec = new ProducerRecord<String, String>("search", key);
 
 
-            //producer.send(rec);
+            ProducerRecord<String, String> rec = new ProducerRecord<String, String>("search", "Hi Kafka");
 
-            if (key.isEmpty()){
-                end = false;
-            }
-        }
+            producer.send(rec);
 
         producer.close();
 
     }
-    public  void producerSend() {
-        
-    }
+
 }

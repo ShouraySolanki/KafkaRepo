@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class ConsumerExample {
 
-    public String consumeMethod(){
+    public String consumeMethod(String topic){
 
         Properties config = new Properties();
 
@@ -24,7 +24,7 @@ public class ConsumerExample {
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(config);
 
-        kafkaConsumer.subscribe(Arrays.asList("search"));
+        kafkaConsumer.subscribe(Arrays.asList(topic));
 
         while (true){
             ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ZERO);

@@ -1,6 +1,8 @@
 import com.kafka.example.ConsumerExample;
 import com.kafka.example.ProducerExample;
 import com.kafka.example.util.KafkaUtils;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
 
 public class AppRunner {
 
@@ -8,10 +10,10 @@ public class AppRunner {
 
 
         ProducerExample producerExample = new ProducerExample();
-        producerExample.produceMethod("hi Kafka");
+        producerExample.produceMethod("research","hi Kafka");
 
         ConsumerExample consumerExample = new ConsumerExample();
-        System.out.println(consumerExample.consumeMethod());
+        System.out.println(consumerExample.consumeMethod("research"));
 
     }
 }

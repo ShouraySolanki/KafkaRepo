@@ -6,11 +6,9 @@ public class AppRunner {
 
     public static void main(String[] args) {
 
-        KafkaUtils kafkaUtils = new KafkaUtils();
-        kafkaUtils
-/*
+
         ProducerExample producerExample = new ProducerExample();
-        producerExample.producerSend();*/
+        producerExample.produceMethod("hi Kafka");
 
         ConsumerExample consumerExample = new ConsumerExample();
         System.out.println(consumerExample.consumeMethod());

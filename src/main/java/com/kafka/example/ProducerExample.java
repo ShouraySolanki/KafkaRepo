@@ -13,8 +13,23 @@ import com.kafka.example.util.KafkaUtils;
 
 public class ProducerExample {
 
+    public ProducerExample(){
+        super();
+    }
+    public void produceMethod(String message){
+        KafkaUtils kafkaUtils = new KafkaUtils();
+        kafkaUtils.getProducer();
+
+        ProducerRecord<String, String> rec = new ProducerRecord<String, String>("search", message);
+
+        kafkaUtils.getProducer().send(rec);
+
+        kafkaUtils.getProducer().close();
 
 
+    }
+
+/*
     public void produceMethod(Producer producer) {
 
 
@@ -25,6 +40,6 @@ public class ProducerExample {
 
         producer.close();
 
-    }
+    }*/
 
 }

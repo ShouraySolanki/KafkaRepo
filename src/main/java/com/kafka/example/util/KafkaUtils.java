@@ -10,15 +10,17 @@ import java.util.Properties;
 
 public class KafkaUtils {
 
-     public void getProducer(){
+
+     public  Producer getProducer(){
         Properties properties = new Properties();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         Producer producer = new KafkaProducer<String, String>(properties);
-         ProducerExample getproducer = new ProducerExample();
-         getproducer.produceMethod(producer);
 
+        return producer;
     }
+
+
 }

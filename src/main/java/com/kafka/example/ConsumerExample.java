@@ -30,6 +30,7 @@ public class ConsumerExample {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ZERO);
 
             for (ConsumerRecord<String, String> rec : records){
+                //System.out.println(rec.value());
                 return (rec.value());
             }
 

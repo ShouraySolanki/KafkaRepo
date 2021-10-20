@@ -1,6 +1,7 @@
 package com.kafka.example;
 
-import org.json.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -16,6 +17,7 @@ import java.util.Properties;
 public class ConsumerExample {
     public String consumeMethod(){
 
+        ObjectMapper objectMapper = new ObjectMapper();
 
         Properties config = new Properties();
 
@@ -40,12 +42,21 @@ public class ConsumerExample {
 
             for (ConsumerRecord<String, String> rec : records){
 
+                String message = rec.value();
 
-                JSONObject obj = (new JSONObject(rec.value())).getJSONObject("cust_id");
-                Integer pageName = obj.getInt("cust_id");
+                try {
+                    Sum sum =objectMapper.readValue(message, Sum.class);
+                    System.out.println(sum.getA());
+                    System.out.println(sum.getB());
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+                /*JSONObject obj = (new JSONObject(message).getJSONObject("cust_id"));
+                String pageName = obj.getString("cust_id");
+*/
 
-                //System.out.println(rec.value());
-                return (rec.value());
+                //System.out.println(rec.value().getClass().getName());
+                //return (rec.value());
             }
 
         }

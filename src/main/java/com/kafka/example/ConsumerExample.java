@@ -1,5 +1,8 @@
 package com.kafka.example;
 
+import org.json.JSONObject;
+
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -11,7 +14,6 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class ConsumerExample {
-
     public String consumeMethod(){
 
 
@@ -21,13 +23,15 @@ public class ConsumerExample {
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, new StringDeserializer().getClass().getName());
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, new StringDeserializer().getClass().getName());
         config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+        config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "consumerGroup");
         config.put(ConsumerConfig.CLIENT_ID_CONFIG, "sampleConsumer");
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(config);
 
-        kafkaConsumer.subscribe(Arrays.asList("search"));
+        kafkaConsumer.subscribe(Arrays.asList("jsontopic"));
         kafkaConsumer.poll(0);
         kafkaConsumer.seekToBeginning(kafkaConsumer.assignment());
 
@@ -35,8 +39,13 @@ public class ConsumerExample {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ZERO);
 
             for (ConsumerRecord<String, String> rec : records){
-                System.out.println(rec.value());
-                //return (rec.value());
+
+
+                JSONObject obj = (new JSONObject(rec.value())).getJSONObject("cust_id");
+                Integer pageName = obj.getInt("cust_id");
+
+                //System.out.println(rec.value());
+                return (rec.value());
             }
 
         }

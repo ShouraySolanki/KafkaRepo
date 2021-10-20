@@ -1,4 +1,3 @@
-/*
 package com.kafka.example.util;
 
 import com.kafka.example.ProducerExample;
@@ -16,13 +15,11 @@ import java.util.function.Consumer;
 
 public class KafkaUtils {
 
-    */
-/*Producer producer = new KafkaProducer<String, String>(getProducer());
+    /*Producer producer = new KafkaProducer<String, String>(getProducer());
     public KafkaUtils(Producer producer) {
         super();
         this.producer = producer;
-    }*//*
-
+    }*/
 
     public  Producer getProducer(){
         Properties properties = new Properties();
@@ -37,4 +34,3 @@ public class KafkaUtils {
 
 
 }
-*/

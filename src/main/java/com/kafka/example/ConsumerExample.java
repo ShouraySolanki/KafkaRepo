@@ -1,24 +1,19 @@
 package com.kafka.example;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
-import java.time.Duration;
-import java.util.Arrays;
 import java.util.Properties;
 
 public class ConsumerExample {
-    public String consumeMethod(){
+    public KafkaConsumer<String, String> consumeMethod(){
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        /*ObjectMapper objectMapper = new ObjectMapper();
 
+        ProducerExample producerExample = new ProducerExample();
+*/
         Properties config = new Properties();
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -33,32 +28,6 @@ public class ConsumerExample {
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(config);
 
-        kafkaConsumer.subscribe(Arrays.asList("jsontopic"));
-        kafkaConsumer.poll(0);
-        kafkaConsumer.seekToBeginning(kafkaConsumer.assignment());
-
-        while (true){
-            ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ZERO);
-
-            for (ConsumerRecord<String, String> rec : records){
-
-                String message = rec.value();
-
-                try {
-                    Sum sum =objectMapper.readValue(message, Sum.class);
-                    System.out.println(sum.getA());
-                    System.out.println(sum.getB());
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-                /*JSONObject obj = (new JSONObject(message).getJSONObject("cust_id"));
-                String pageName = obj.getString("cust_id");
-*/
-
-                //System.out.println(rec.value().getClass().getName());
-                //return (rec.value());
-            }
-
-        }
+        return kafkaConsumer;
     }
 }

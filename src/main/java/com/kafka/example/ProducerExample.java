@@ -1,3 +1,4 @@
+/*
 package com.kafka.example;
 
 import org.apache.kafka.clients.producer.Producer;
@@ -23,6 +24,7 @@ public class ProducerExample {
 
     }
 
+*/
 /*
     public void produceMethod(Producer producer) {
 
@@ -34,6 +36,8 @@ public class ProducerExample {
 
         producer.close();
 
-    }*/
+    }*//*
+
 
 }
+*/
